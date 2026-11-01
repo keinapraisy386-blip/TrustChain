@@ -1,0 +1,9 @@
+{
+  "name": "trustchain-demo",
+  "version": "1.0.0",
+  "description": "TrustChain: simulated blockchain donation tracking demo (no real funds, no dependencies)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" },
+  "license": "MIT"
+}
