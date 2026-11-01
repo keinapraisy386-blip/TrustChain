@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TrustChain – Transparent Donations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--sf:#f3f7fa;--tx:#0d1b2e;--mu:#58697b;--ln:#d9e3ea;--navy:#0b1f3a;--teal:#0b7f8a;--tl:#19c3c9;--ok:#0a7d4f;--okb:#e2f6ec;--er:#b42318;--erb:#fdeceb;--btn:#0b7f8a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09131f;--sf:#102238;--tx:#e8f0f7;--mu:#9db1c4;--ln:#213a54;--teal:#3fd0d6;--ok:#4fd69a;--okb:#0f3326;--er:#ff8a80;--erb:#3b1714;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#09131f;--sf:#102238;--tx:#e8f0f7;--mu:#9db1c4;--ln:#213a54;--teal:#3fd0d6;--ok:#4fd69a;--okb:#0f3326;--er:#ff8a80;--erb:#3b1714;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.55 "Source Sans 3",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:60}
+h1,h2,h3,.brand{font-family:Sora,system-ui,sans-serif;margin:0;line-height:1.2}
+header{background:var(--navy);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
+.hd{max-width:1180px;margin:auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px}.brand i{font-style:normal;background:var(--tl);color:var(--navy);border-radius:8px;padding:2px 7px}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{background:#f5b301;color:#2a1d00;font-weight:600;font-size:13px;border-radius:99px;padding:3px 11px;display:inline-flex;gap:6px;align-items:center}
+.pill:before{content:"";width:8px;height:8px;border-radius:50%;background:#2a1d00;animation:bl 1.6s infinite}
+@keyframes bl{50%{opacity:.25}}
+nav{max-width:1180px;margin:auto;padding:0 20px;display:flex;gap:4px;overflow-x:auto}
+nav a{color:#b8c8da;text-decoration:none;padding:10px 14px;border-bottom:3px solid transparent;white-space:nowrap;font-weight:600}
+nav a.on{color:#fff;border-color:var(--tl)}
+.notice{background:var(--sf);border-bottom:1px solid var(--ln);text-align:center;font-size:14px;padding:8px 16px;color:var(--mu)}
+main{max-width:1180px;margin:auto;padding:24px 20px 60px}
+.btn{font:600 15px "Source Sans 3",sans-serif;border:1px solid var(--btn);background:var(--btn);color:#fff;border-radius:9px;padding:9px 16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--teal);border-color:var(--teal)}
+.btn.sm{padding:5px 11px;font-size:14px}.btn.nav2{background:transparent;color:#fff;border-color:#4a627f}
+.btn:disabled{opacity:.6;cursor:wait}
+:focus-visible{outline:3px solid var(--tl);outline-offset:2px}
+.hero{background:var(--navy);color:#fff;border-radius:16px;padding:34px;display:grid;gap:26px;grid-template-columns:1.1fr 1fr;align-items:center;margin-bottom:22px}
+.hero h1{font-size:clamp(28px,4.4vw,44px);font-weight:800}
+.hero p{color:#bcd0e3;margin:12px 0 20px;font-size:18px}
+.chain{display:flex;flex-direction:column;gap:0}
+.mb{background:#12305a;border:1px solid #2a4d7c;border-radius:10px;padding:10px 14px;font-size:13px;color:#cfe0f1;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.mb b{color:var(--tl);font-family:Sora}.mb code{color:#8fb3d9}
+.lk{height:14px;width:2px;background:var(--tl);margin-left:28px}
+.grid{display:grid;gap:16px}.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--bg);border:1px solid var(--ln);border-radius:14px;padding:20px}
+.stat span{color:var(--mu);font-size:14px}.stat b{display:block;font:800 28px Sora;margin-top:4px}.stat.t b{color:var(--teal)}
+h2{font-size:22px;margin:28px 0 14px}h3{font-size:18px}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 14px}.ph h2{margin:0}
+.bar{height:10px;border-radius:9px;background:var(--sf);border:1px solid var(--ln);overflow:hidden;margin:10px 0 4px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--tl))}
+.cc .ic{font-size:26px}.cc p{color:var(--mu);margin:6px 0}.row{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--mu)}.row b{color:var(--tx)}
+.acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+label{display:block;font-weight:600;margin:12px 0 5px;font-size:14px}
+input,select,textarea{width:100%;font:inherit;padding:9px 11px;border:1px solid var(--ln);border-radius:9px;background:var(--bg);color:var(--tx)}
+.chips{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.chip{border:1px solid var(--ln);background:var(--sf);color:var(--tx);border-radius:99px;padding:3px 12px;cursor:pointer;font:inherit;font-size:14px}
+.tw{overflow-x:auto;border:1px solid var(--ln);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:820px}th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--ln);white-space:nowrap}th{background:var(--sf);color:var(--mu);font-weight:600}tr:last-child td{border:0}
+.tag{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:600}.tag.d{background:var(--okb);color:var(--ok)}.tag.x{background:#e1ecfb;color:#1d4e9c}.tag.s{background:#fff3cd;color:#6b4b00}
+.rc{border:2px dashed var(--teal);border-radius:14px;padding:18px;background:var(--sf)}.rc dl{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}.rc dt{color:var(--mu)}.rc dd{margin:0;word-break:break-all;font-weight:600}
+code,.mono{font-family:ui-monospace,Menlo,monospace;font-size:13px;word-break:break-all}
+.cs{display:flex;gap:0;overflow-x:auto;padding:6px 2px 14px;align-items:stretch}
+.bk{min-width:230px;background:var(--bg);border:1px solid var(--ln);border-top:4px solid var(--teal);border-radius:12px;padding:12px;font-size:13px}
+.bk.g{border-top-color:#f5b301}.lnk{align-self:center;min-width:26px;height:2px;background:var(--teal);position:relative}
+.bk div{margin:3px 0;color:var(--mu)}.bk b{color:var(--tx)}
+.note{border-left:4px solid #f5b301;background:var(--sf);padding:10px 14px;border-radius:0 10px 10px 0;font-size:14px;margin:12px 0}
+.ov{position:fixed;inset:0;background:rgba(5,15,30,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:100}
+.md{background:var(--bg);color:var(--tx);border-radius:16px;max-width:620px;width:100%;max-height:88vh;overflow:auto;padding:24px}
+#toasts{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;z-index:200;max-width:calc(100vw - 28px)}
+.ts{padding:11px 16px;border-radius:10px;font-weight:600;background:var(--okb);color:var(--ok);border:1px solid var(--ok);box-shadow:0 4px 14px rgba(0,0,0,.18)}.ts.e{background:var(--erb);color:var(--er);border-color:var(--er)}
+.res{border-radius:10px;padding:12px;margin-top:12px;font-weight:600}.res.ok{background:var(--okb);color:var(--ok)}.res.no{background:var(--erb);color:var(--er)}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding:22px}}
+@media(prefers-reduced-motion:reduce){.pill:before{animation:none}}
+</style>
+</head>
+<body>
+<header>
+ <div class="hd"><div class="brand"><i>⛓</i>TrustChain</div>
+  <div class="tools"><span class="pill">Demo Mode</span>
+   <button class="btn nav2 sm" data-act="sample">Load Sample Data</button>
+   <button class="btn nav2 sm" data-act="reset">Reset Demo</button></div></div>
+ <nav id="nav"></nav>
+</header>
+<main id="app"></main>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+/* ---------- data ---------- */
+const CAMPS=[
+{id:'edu',name:'Education Support',org:'Vidya Deepam Foundation',icon:'📘',goal:500000,desc:'Scholarships, books and digital classrooms for 400 first-generation learners in rural Tamil Nadu.'},
+{id:'med',name:'Medical Assistance',org:'CareBridge Health Trust',icon:'🩺',goal:400000,desc:'Emergency surgeries and dialysis support for families living below the poverty line.'},
+{id:'dis',name:'Disaster Relief',org:'Rapid Aid Collective',icon:'🌊',goal:600000,desc:'Food, clean water and temporary shelter for flood-affected villages.'}];
+const SEED=[['Donation','edu',125000,12],['Donation','med',150000,11],['Donation','dis',220000,10],['Donation','edu',98000,8],['Distribution','edu',80000,6,'Scholarship fees for 40 students'],['Donation','med',110000,5],['Distribution','med',90000,4,'Dialysis sessions for 12 patients'],['Donation','dis',145000,3],['Distribution','dis',150000,2,'Food kits and drinking water for 600 families'],['Donation','edu',60000,1]];
+const MORE=[['Donation','edu',25000],['Donation','med',40000],['Donation','dis',75000],['Donation','dis',18000],['Distribution','dis',60000,'Temporary shelter tarpaulins'],['Donation','med',12500]];
+const VIEWS={dashboard:'Dashboard',campaigns:'Campaigns',donations:'Donations',distribution:'Fund Distribution',history:'Transaction History'};
+const KEY='trustchain-demo-v1';
+let S={blocks:[]},view='dashboard',pre='edu',last=null,EV=null,VB=null;
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>'₹'+Number(n).toLocaleString('en-IN');
+const when=t=>new Date(t).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});
+const short=h=>h.slice(0,10)+'…'+h.slice(-6);
+const enc=s=>new TextEncoder().encode(s);
+const camp=id=>CAMPS.find(c=>c.id===id)||{name:'—'};
+const rid=n=>[...crypto.getRandomValues(new Uint8Array(n))].map(x=>x.toString(16).padStart(2,'0')).join('');
+async function sha(buf){const d=await crypto.subtle.digest('SHA-256',buf);return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+const hashOf=b=>sha(enc(JSON.stringify([b.index,b.prev,b.type,b.camp||'',b.amount,b.ts,b.tx,b.evHash||''])));
+function toast(m,err){const t=document.createElement('div');t.className='ts'+(err?' e':'');t.textContent=m;$('#toasts').append(t);setTimeout(()=>t.remove(),3800)}
+function save(){}
+function stats(){const o={tot:0,dist:0,by:{}};CAMPS.forEach(c=>o.by[c.id]={in:0,out:0});S.blocks.forEach(b=>{if(b.type==='Donation'){o.tot+=b.amount;o.by[b.camp].in+=b.amount}if(b.type==='Distribution'){o.dist+=b.amount;o.by[b.camp].out+=b.amount}});return o}
+const receiptText=(c,a,p,d)=>`TRUSTCHAIN DEMO RECEIPT\nCampaign: ${camp(c).name}\nAmount: ${a}\nPurpose: ${p}\nDate: ${d}\nVendor: Sample Vendor Pvt Ltd (fictional)\nRef: ${rid(6)}`;
+
+/* ---------- API client (backend owns the ledger) ---------- */
+async function api(path,body){
+  const r=await fetch(path,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.error||'Request failed');
+  return j;
+}
+async function refresh(){S=await api('/api/state')}
+
+/* ---------- components ---------- */
+function cCard(c,st){
+  const pct=Math.min(100,Math.round(st.in/c.goal*100));
+  return `<article class="card cc"><div class="ic">${c.icon}</div><h3>${c.name}</h3><div class="row"><span>Organizer</span><b>${c.org}</b></div><p>${c.desc}</p>
+  <div class="bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>
+  <div class="row"><span>${fmt(st.in)} raised of ${fmt(c.goal)}</span><b>${pct}%</b></div>
+  <div class="acts"><button class="btn ghost sm" data-act="view" data-id="${c.id}">View Campaign</button><button class="btn sm" data-act="donate" data-id="${c.id}">Donate Now</button></div></article>`;
+}
+function modal(html){closeM();const o=document.createElement('div');o.className='ov';o.id='ov';o.innerHTML=`<div class="md" role="dialog" aria-modal="true">${html}</div>`;o.onclick=e=>{if(e.target===o)closeM()};document.body.append(o)}
+function closeM(){const o=$('#ov');if(o)o.remove()}
+const demoTag='<span class="tag s">DEMO / SIMULATED</span>';
+function distTable(list){
+  if(!list.length)return '<div class="card">No distributions recorded yet. Record one above to see it here.</div>';
+  return `<div class="tw"><table><tr><th>Date</th><th>Campaign</th><th>Amount</th><th>Purpose</th><th>Evidence hash</th><th>Actions</th></tr>${list.map(b=>`<tr><td>${when(b.ts)}</td><td>${camp(b.camp).name}</td><td>${fmt(b.amount)}</td><td>${esc(b.purpose)}</td><td class="mono">${short(b.evHash)}</td><td><button class="btn ghost sm" data-act="verify" data-i="${b.index}">Verify Evidence</button> <button class="btn ghost sm" data-act="detail" data-i="${b.index}">View Details</button></td></tr>`).join('')}</table></div>`;
+}
+
+/* ---------- views ---------- */
+function vDash(){
+  const s=stats(),rec=S.blocks.slice(-4);
+  return `<section class="hero"><div><h1>TrustChain – Transparent Donations</h1><p>Every Donation. Every Transaction. Transparent.</p>
+   <div class="acts"><button class="btn" style="background:var(--tl);border-color:var(--tl);color:var(--navy)" data-go="donations">Make a Donation</button><button class="btn nav2" data-go="history">Open Blockchain Explorer</button></div></div>
+   <div class="chain" aria-label="Latest simulated blocks">${rec.map((b,i)=>`${i?'<div class="lk"></div>':''}<div class="mb"><b>Block #${b.no}</b><span>${b.type==='Genesis'?'Genesis':b.type+' · '+fmt(b.amount)}</span><code>${short(b.hash)}</code></div>`).join('')}</div></section>
+   <div class="grid g4"><div class="card stat t"><span>Total donations</span><b>${fmt(s.tot)}</b></div><div class="card stat"><span>Active campaigns</span><b>${CAMPS.length}</b></div><div class="card stat"><span>Recorded distributions</span><b>${fmt(s.dist)}</b></div><div class="card stat t"><span>Remaining recorded balance</span><b>${fmt(s.tot-s.dist)}</b></div></div>
+   <h2>Campaigns</h2><div class="grid g3">${CAMPS.map(c=>cCard(c,s.by[c.id])).join('')}</div>
+   
+   `;
+}
+function vCamps(){const s=stats();return `<div class="ph"><h2>Campaigns</h2></div><div class="grid g3">${CAMPS.map(c=>cCard(c,s.by[c.id])).join('')}</div>`}
+function vDon(){
+  const s=stats(),recent=S.blocks.filter(b=>b.type==='Donation').slice(-5).reverse();
+  return `<div class="ph"><h2>Simulated Donation</h2></div><div class="card"><h3>Donate to a campaign</h3>
+  <label for="dc">Campaign</label><select id="dc">${CAMPS.map(c=>`<option value="${c.id}" ${c.id===pre?'selected':''}>${c.name}</option>`).join('')}</select>
+  <label for="da">Amount (₹)</label><input id="da" type="number" min="1" step="1" placeholder="e.g. 2500" inputmode="numeric">
+  <div class="chips">${[500,1000,5000,10000].map(n=>`<button class="chip" data-amt="${n}">${fmt(n)}</button>`).join('')}</div>
+  <div class="note">No wallet, MetaMask, card or real money is involved. This creates a simulated record only.</div>
+  <button class="btn" id="dgo" data-act="confirmDon">Confirm Donation</button></div>
+  <div>${last?`<div class="rc"><h3>✅ ${last.status}</h3>${demoTag}<dl><dt>Transaction ID</dt><dd class="mono">${last.tx}</dd><dt>Campaign</dt><dd>${camp(last.camp).name}</dd><dt>Amount</dt><dd>${fmt(last.amount)}</dd><dt>Date and time</dt><dd>${when(last.ts)}</dd><dt>Block number</dt><dd>#${last.no}</dd><dt>Status</dt><dd>${last.status}</dd></dl></div>`:`<div class="card"><h3>Receipt</h3><p style="color:var(--mu)">Your simulated transaction receipt will appear here after you confirm a donation.</p></div>`}
+  <h2>Recent donations</h2>${recent.map(b=>`<div class="card row" style="margin-bottom:8px"><span>${camp(b.camp).name} · ${when(b.ts)}</span><b>${fmt(b.amount)}</b></div>`).join('')}</div></div>`;
+}
+function vDist(){
+  EV=null;const s=stats(),list=S.blocks.filter(b=>b.type==='Distribution').reverse();
+  return `<div class="ph"><h2>Fund Distribution</h2></div><div class="card"><h3>Record a distribution</h3>
+  <label for="xc">Campaign</label><select id="xc">${CAMPS.map(c=>`<option value="${c.id}">${c.name} (available ${fmt(s.by[c.id].in-s.by[c.id].out)})</option>`).join('')}</select>
+  <label for="xa">Amount (₹)</label><input id="xa" type="number" min="1" step="1" inputmode="numeric">
+  <label for="xp">Purpose</label><input id="xp" maxlength="120" placeholder="e.g. Classroom laptops for 20 students">
+  <label for="xd">Date</label><input id="xd" type="date" value="${new Date().toISOString().slice(0,10)}">
+  <label for="ef">Evidence document</label><input id="ef" type="file">
+  <div class="chips"><button class="chip" data-act="demoEv">Use demo evidence</button></div>
+  <div id="evs" class="note">No evidence selected. Upload a sample receipt or use demo evidence.</div>
+  <button class="btn" id="xgo" data-act="recDist">Record Distribution</button></div>
+  <div class="card"><h3>What the hash proves</h3><p>The browser computes a SHA-256 fingerprint of the evidence file and stores it in the ledger. If the file is edited later, verification fails.</p><div class="note">Evidence hash verification confirms file integrity only. It does not prove the expense is legitimate.</div></div></div>
+  <h2>Recorded distributions</h2>${distTable(list)}`;
+}
+function vHist(){
+  const tx=S.blocks.filter(b=>b.type!=='Genesis').slice().reverse();
+  return `<div class="ph"><h2>Blockchain Explorer</h2>${demoTag}<button class="btn ghost sm" data-act="chain">Verify Chain Integrity</button></div>
+  <div class="tw"><table><tr><th>Transaction ID</th><th>Type</th><th>Campaign</th><th>Amount</th><th>Timestamp</th><th>Block</th><th>Status</th><th></th></tr>${tx.map(b=>`<tr><td class="mono">${short(b.tx)}</td><td><span class="tag ${b.type==='Donation'?'d':'x'}">${b.type}</span></td><td>${camp(b.camp).name}</td><td>${fmt(b.amount)}</td><td>${when(b.ts)}</td><td>#${b.no}</td><td>${b.status} ${demoTag}</td><td><button class="btn ghost sm" data-act="detail" data-i="${b.index}">View Details</button></td></tr>`).join('')}</table></div>
+  <h2>Chain of linked blocks</h2><p style="color:var(--mu);margin-top:-6px">Each block stores the hash of the previous one. Changing an old record would break every link after it. These blocks are simulated.</p>
+  <div class="cs">${S.blocks.map((b,i)=>`${i?'<div class="lnk"></div>':''}<div class="bk ${b.type==='Genesis'?'g':''}"><b>Block #${b.no}</b> ${demoTag}<div>${b.type}${b.amount?' · '+fmt(b.amount):''}</div><div>Prev: <code>${short(b.prev)}</code></div><div>Hash: <code>${short(b.hash)}</code></div></div>`).join('')}</div>`;
+}
+function render(){
+  $('#nav').innerHTML=Object.entries(VIEWS).map(([k,v])=>`<a href="#${k}" class="${k===view?'on':''}">${v}</a>`).join('');
+  $('#app').innerHTML={dashboard:vDash,campaigns:vCamps,donations:vDon,distribution:vDist,history:vHist}[view]();
+}
+function go(v){if(!VIEWS[v])v='dashboard';view=v;if(location.hash!=='#'+v)location.hash=v;render();scrollTo(0,0)}
+
+/* ---------- details & verify ---------- */
+function detail(i){
+  const b=S.blocks[i];
+  modal(`<h3>Record details</h3>${demoTag}<div class="note">Simulated record. Not a real blockchain transaction.</div><div class="rc"><dl>
+  <dt>Transaction ID</dt><dd class="mono">${b.tx}</dd><dt>Type</dt><dd>${b.type}</dd>${b.camp?`<dt>Campaign</dt><dd>${camp(b.camp).name}</dd><dt>Amount</dt><dd>${fmt(b.amount)}</dd>`:''}
+  <dt>Timestamp</dt><dd>${when(b.ts)}</dd><dt>Block number</dt><dd>#${b.no}</dd><dt>Status</dt><dd>${b.status}</dd>
+  ${b.purpose?`<dt>Purpose</dt><dd>${esc(b.purpose)}</dd>`:''}${b.evHash?`<dt>Evidence file</dt><dd>${esc(b.evName)}</dd><dt>Evidence SHA-256</dt><dd class="mono">${b.evHash}</dd>`:''}
+  <dt>Previous hash</dt><dd class="mono">${b.prev}</dd><dt>Block hash</dt><dd class="mono">${b.hash}</dd></dl></div>
+  <div class="acts">${b.evHash?`<button class="btn ghost" data-act="verify" data-i="${i}">Verify Evidence</button>`:''}<button class="btn" data-act="close">Close</button></div>`);
+}
+function verifyM(i){
+  VB=S.blocks[i];
+  modal(`<h3>Verify evidence</h3>${demoTag}<p>Stored SHA-256 for <b>${esc(VB.evName)}</b>:</p><p class="mono">${VB.evHash}</p>
+  <label for="vf">Select the file to check</label><input id="vf" type="file">
+  ${VB.evText?`<div class="chips"><button class="chip" data-act="vOrig">Use original demo file</button><button class="chip" data-act="vTamper">Use edited demo file</button></div>`:''}
+  <div id="vr"></div><div class="note">A match confirms file integrity only. It does not prove the expense is legitimate.</div><button class="btn" data-act="close">Close</button>`);
+}
+async function checkHash(buf,name){
+  const h=await sha(buf),ok=h===VB.evHash;
+  $('#vr').innerHTML=`<div class="res ${ok?'ok':'no'}">${ok?'✅ Match: this file is identical to the evidence recorded in the ledger.':'❌ No match: this file differs from the recorded evidence.'}<div class="mono" style="font-weight:400;margin-top:6px">${esc(name)}<br>${h}</div></div>`;
+  toast(ok?'Evidence verified: hash matches.':'Verification failed: hash does not match.',!ok);
+}
+async function setEv(buf,name,text){
+  EV={name,hash:await sha(buf),text};
+  $('#evs').innerHTML=`Selected: <b>${esc(name)}</b><br>SHA-256: <code>${EV.hash}</code>`;
+  toast('Evidence hash calculated in your browser.');
+}
+
+/* ---------- actions ---------- */
+const ACT={
+  close:closeM,
+  view(el){const id=el.dataset.id,c=camp(id),st=stats().by[id],rows=S.blocks.filter(b=>b.camp===id&&b.type!=='Genesis').slice(-6).reverse();
+    modal(`<h3>${c.icon} ${c.name}</h3><p>${c.desc}</p><div class="row"><span>Organizer</span><b>${c.org}</b></div><div class="row"><span>Goal</span><b>${fmt(c.goal)}</b></div><div class="row"><span>Raised</span><b>${fmt(st.in)}</b></div><div class="row"><span>Distributed</span><b>${fmt(st.out)}</b></div><div class="row"><span>Remaining</span><b>${fmt(st.in-st.out)}</b></div>
+    <h3 style="margin-top:16px">Latest records</h3>${rows.map(b=>`<div class="row" style="padding:5px 0"><span>${b.type} · ${when(b.ts)}</span><b>${fmt(b.amount)}</b></div>`).join('')||'<p>No records yet.</p>'}
+    <div class="acts"><button class="btn" data-act="donate" data-id="${id}">Donate Now</button><button class="btn ghost" data-act="close">Close</button></div>`)},
+  donate(el){pre=el.dataset.id;closeM();go('donations')},
+  async confirmDon(){
+    const c=$('#dc').value,a=Number($('#da').value);
+    if(!a||a<1||!Number.isFinite(a))return toast('Enter a donation amount of at least ₹1.',1);
+    if(a>1000000)return toast('Demo donations are limited to ₹10,00,000.',1);
+    pre=c;const btn=$('#dgo');btn.disabled=true;btn.textContent='Simulating block confirmation…';
+    try{last=await api('/api/donate',{camp:c,amount:Math.round(a)});await refresh()}catch(e){btn.disabled=false;btn.textContent='Confirm Donation';return toast(e.message,1)}
+    render();
+    toast(`Donation of ${fmt(last.amount)} confirmed in block #${last.no} (simulated).`);
+  },
+  demoEv(){
+    const c=$('#xc').value,a=$('#xa').value||'0',p=$('#xp').value||'Demo expense',d=$('#xd').value,t=receiptText(c,fmt(a),p,d);
+    setEv(enc(t),'demo-receipt.txt',t)},
+  async recDist(){
+    const c=$('#xc').value,a=Math.round(Number($('#xa').value)),p=$('#xp').value.trim(),d=$('#xd').value,av=stats().by[c];
+    if(!a||a<1)return toast('Enter a distribution amount.',1);
+    if(a>av.in-av.out)return toast(`Amount exceeds the available balance of ${fmt(av.in-av.out)} for this campaign.`,1);
+    if(!p)return toast('Enter the purpose of this distribution.',1);
+    if(!d)return toast('Choose a date.',1);
+    if(!EV)return toast('Upload an evidence file or choose demo evidence first.',1);
+    let b;try{b=await api('/api/distribute',{camp:c,amount:a,purpose:p,date:d,evName:EV.name,evText:EV.text,evHash:EV.hash});await refresh()}catch(e){return toast(e.message,1)}
+    render();toast(`Distribution of ${fmt(a)} recorded in block #${b.no} with evidence hash (simulated).`);
+  },
+  detail(el){detail(+el.dataset.i)},
+  verify(el){verifyM(+el.dataset.i)},
+  vOrig(){checkHash(enc(VB.evText),VB.evName)},
+  vTamper(){checkHash(enc(VB.evText+'\nEdited amount'),VB.evName+' (edited)')},
+  async chain(){const r=await api('/api/verify-chain');r.ok?toast(`All ${r.blocks} simulated blocks are correctly linked (checked by the server).`):toast(`Chain broken at block #${r.brokenAt}.`,1)},
+  async sample(){await api('/api/sample',{});await refresh();render();toast('Sample data loaded: new simulated records added to the ledger.')},
+  reset(){modal(`<h3>Reset demo?</h3><p>This removes every record you created and restores the initial sample data.</p><div class="acts"><button class="btn" data-act="doReset">Reset Demo</button><button class="btn ghost" data-act="close">Cancel</button></div>`)},
+  async doReset(){closeM();last=null;await api('/api/reset',{});await refresh();render();toast('Demo reset to the initial sample data.')}
+};
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-act]');
+  if(a&&ACT[a.dataset.act]){Promise.resolve(ACT[a.dataset.act](a)).catch(e=>toast(e.message||'Something went wrong. Please try again.',1));return}
+  const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
+  const m=e.target.closest('[data-amt]');if(m)$('#da').value=m.dataset.amt;
+});
+document.addEventListener('change',async e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  const buf=await f.arrayBuffer();
+  if(e.target.id==='ef')setEv(buf,f.name);
+  if(e.target.id==='vf')checkHash(buf,f.name);
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+addEventListener('hashchange',()=>{const v=location.hash.slice(1);if(VIEWS[v]&&v!==view){view=v;render()}});
+
+/* ---------- start ---------- */
+(async()=>{
+  if(!window.crypto||!crypto.subtle){$('#app').innerHTML='<div class="card">This browser does not support the Web Crypto API needed for hashing. Please open the demo in a current browser over HTTPS.</div>';return}
+  try{await refresh()}catch(e){$('#app').innerHTML='<div class="card">Cannot reach the TrustChain backend. Start it with <code>npm start</code> and open http://localhost:3000.</div>';return}
+  const v=location.hash.slice(1);if(VIEWS[v])view=v;
+  render();
+})();
+</script>
+</body>
+</html>
